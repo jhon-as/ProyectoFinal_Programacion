@@ -1,0 +1,55 @@
+#alo{
+	background-color: #1877f2;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	text-decoration: none;
+	padding: 8px;
+	font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+	margin-left: 128px;
+}
+.hb{
+	text-align: center;
+	font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+	font-size: 26px;
+	font-weight: normal;
+	color: rgb(231, 21, 21);
+}
+#pj{
+	text-align: center;
+    color: #606770;
+    font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 1;/*este es el que da el comportamiento del modal*/
+	opacity:1;
+	transition: opacity 400ms ease-in;
+	pointer-events: auto;
+}
+.modalDialog:target {
+	opacity:0;
+	pointer-events: auto;
+}
+.modalDialog > div {
+	width: 400px;
+	height: 160px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+    transition: opacity 400ms ease-in;
+}

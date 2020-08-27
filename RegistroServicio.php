@@ -24,20 +24,26 @@
                 $telefono = mysql_fix_string($conexion, $_POST['telefono']);
                 $pass=md5($_POST['pass']);
         
-                $query = "INSERT INTO rol_usuario VALUES( '$dni','$rol', '$nombre','$apellido','$pass','$telefono')";
-                $query2 = "INSERT INTO cliente VALUES('$dni','$nombre','$apellido','$telefono')";
-                $result = $conexion->query($query);
-                $result2 = $conexion->query($query2);
+                if('administrador' ==  $rol){
+                    $query = "INSERT INTO rol_usuario VALUES( '$dni','$rol', '$nombre','$apellido','$pass','$telefono')";
+                    $result = $conexion->query($query);
+                }else{
+                    $query = "INSERT INTO rol_usuario VALUES( '$dni','$rol', '$nombre','$apellido','$pass','$telefono')";
+                    $query2 = "INSERT INTO cliente VALUES('$dni','$nombre','$apellido','$telefono')";
+                    $result = $conexion->query($query);
+                    $result2 = $conexion->query($query2);
+                }
                 if (!$result && !$result2) die ("Falló registro");
                 echo <<<_END
                 <!DOCTYPE html>
                 <html>
                 <head>
-                <title>Registrado </title>
+                <title>Registro</title>
                 <link rel = "stylesheet" type="text/css" href="EstiloRegistro.css">
+                <link rel = "stylesheet" type="text/css" href="ModalRegistro.css">
                 </head>
                 <body>
-                <h1>Registrado</h1>
+                <h1>Registro De Usuarios</h1>
                 <form id ="principal" method="post" action="RegistroServicio.php" >
                    <select name="rol" size="1">
                         <option value="cliente">CLIENTE</options>
@@ -52,7 +58,14 @@
                     <input id ="inicio" type="submit" value = "Registrar">
                     <a id ="cuenta" href='SesionServicio.php'>Iniciar Sesion</a>
                 </form>
-                
+                <div id="openModal" class="modalDialog">
+                    <div>
+                        <h3 class = "hb">Felicidades!!! Usted fue</h3>
+                        <h3 class = "hb">Registrado Exitosamente</h3>
+                        <p id ="pj">Haz click en (Iniciar Sesion) para empezar</p>
+                        <a href="SesionServicio.php" id = 'alo'>Iniciar Sesion</a>
+                    </div>
+                </div>
                 </body>
                 </html>
                 _END;
