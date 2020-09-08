@@ -16,14 +16,14 @@
                 <ul>
                     <li><a class ="active" href="PaginaPrincipal.php">Inicio</a></li>
                     <li><a href="Cliente_Usuario.php">Cliente / Usuario</a></li>
-                    <li><a href="Servico_Cliente.php">Registro De Servicio</a></li>
+                    <li><a href="#">Registro De Servicio</a></li>
                     <li><a href="Cargar_Informe.php">Plan / Pago</a></li>
                 </ul>
             </nav>
             <section id="container">
                 <h1>Lista de Clientes</h1> 
 
-                <form action="#" method="get" class="form_seach" >
+                <form action="buscar.php" method="get" class="form_seach" >
                 <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda">
                 <input type="submit" value="Buscar" class="btn_search">
                 </form>
@@ -62,11 +62,19 @@
                 </table>
             </section>
             <section id="container1">
-                <h1>Lista de Usuarios</h1> 
-                <a href='Registrar_Cliente.php' class="nota">Registrar</a>
+                <?php
 
-                <form action="Buscar_Cliente.php" method="get" class="form_seach" >
-                <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda">
+                $buscar = strtolower($_REQUEST['busqueda']);
+
+                if(empty($buscar)){
+                    header("location: Cliente_Usuario.php");
+                }
+                ?>
+                <h1>Lista de Usuarios</h1> 
+                <a href='Buscar_Cliente.php' class="nota">Registrar</a>
+
+                <form action="buscar.php" method="get" class="form_seach" >
+                <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda" value="<?php echo $buscar ?> ">
                 <input type="submit" value="Buscar" class="btn_search">
                 </form>
                 <table>
@@ -85,7 +93,15 @@
                     
                         if ($conexion->connect_error) die ("Fatal error");
 
-                        $query = "SELECT dni,rol, nombre, apellido,contrasena,telefono FROM rol_usuario";
+                        $query = "SELECT dni,rol, nombre, apellido,contrasena,telefono FROM rol_usuario
+                                        where(
+                                            dni like '%$buscar%' OR
+                                            rol LIKE '%$buscar%' OR 
+                                            nombre LIKE '%$buscar%' OR 
+                                            apellido LIKE '%$buscar%'OR 
+                                            contrasena LIKE '%$buscar%'OR 
+                                            telefono LIKE '%$buscar%'
+                                        )";
                         $result = $conexion->query($query);
                         if (!$result) die ("Consulta falló");
 
@@ -104,7 +120,7 @@
                         <td><?php echo htmlspecialchars($fila[5]); ?></td>
                         <td>
                             <a class="link_edit" href = "Actualizar_Cliente.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Editar</a>
-                            <a class="link_elimin" href = "Eliminar_Cliente.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Eliminar</a>
+                            <a class="link_elimin" href = "eliminar_Cliente.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Eliminar</a>
                         </td>                        
                     </tr>
                     <?php

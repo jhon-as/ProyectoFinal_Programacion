@@ -3,7 +3,7 @@
         <head>
             <title>Lista de Clientes </title>
             <link rel = "stylesheet" type="text/css" href="Menu.css">
-            <link rel = "stylesheet" type="text/css" href="Cliente_Usuario.css">
+            <link rel = "stylesheet" type="text/css" href="Cargar_Informe.css">
             <script src="menu.js"></script>
         </head>
         <body>
@@ -21,7 +21,8 @@
                 </ul>
             </nav>
             <section id="container">
-                <h1>Lista de Clientes</h1> 
+                <h1>Lista de Pagos</h1> 
+                <a href='Registrar_Cliente.php' class="nota">Importar</a>
 
                 <form action="#" method="get" class="form_seach" >
                 <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda">
@@ -30,9 +31,11 @@
                 <table>
                     <tr>
                         <th>DNI</th>
-                        <th>NOMBRE</th>
-                        <th>APELLIDO</th>
-                        <th>CELULAR</th>
+                        <th>PLAN</th>
+                        <th>SERVICIO</th>
+                        <th>FECHA</th>
+                        <th>CANT. PAGO</th>
+                        <th>Cambios</th>
                     </tr>
                     <?php
                         require_once 'login.php';
@@ -40,7 +43,7 @@
                     
                         if ($conexion->connect_error) die ("Fatal error");
 
-                        $query = "SELECT dniClie,nombClie, apelClie, celuClie FROM cliente";
+                        $query = "SELECT id, FechaPago, pago, dniClie, idPlan, numeServ FROM informe";
                         $result = $conexion->query($query);
                         if (!$result) die ("Consulta falló");
 
@@ -51,10 +54,14 @@
                             $fila = $result->fetch_array(MYSQLI_NUM);
                     ?>            
                     <tr>
-                        <td><?php echo htmlspecialchars($fila[0]); ?></td> 
+                        <td><?php echo htmlspecialchars($fila[3]); ?></td>
+                        <td><?php echo htmlspecialchars($fila[4]); ?></td>
+                        <td><?php echo htmlspecialchars($fila[5]); ?></td> 
                         <td><?php echo htmlspecialchars($fila[1]); ?></td> 
-                        <td><?php echo htmlspecialchars($fila[2]); ?></td>
-                        <td><?php echo htmlspecialchars($fila[3]); ?></td>                        
+                        <td><?php echo htmlspecialchars($fila[2]); ?></td>  
+                        <td>
+                            <a class="link_edit" href = "Actualizar_Cliente.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Editar</a>
+                        </td>                      
                     </tr>
                     <?php
                         }
@@ -62,21 +69,19 @@
                 </table>
             </section>
             <section id="container1">
-                <h1>Lista de Usuarios</h1> 
-                <a href='Registrar_Cliente.php' class="nota">Registrar</a>
+                <h1>Lista de Planes</h1> 
+                <a href='Registrar_InformePlan.php' class="nota">Registrar</a>
 
-                <form action="Buscar_Cliente.php" method="get" class="form_seach" >
+                <form action="Buscar_InformePlan.php" method="get" class="form_seach" >
                 <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda">
                 <input type="submit" value="Buscar" class="btn_search">
                 </form>
                 <table>
                     <tr>
-                        <th>DNI</th>
-                        <th>ROL</th>
-                        <th>NOMBRE</th>
-                        <th>APELLIDO</th>
-                        <th>CONTRASEÑA</th>
-                        <th>TELEFONO</th>
+                        <th>PLAN</th>
+                        <th>COSTO</th>
+                        <th>MIN. TODO DESTINO</th>
+                        <th>VELOCIDAD (MB)</th>
                         <th>Cambios</th>
                     </tr>
                     <?php
@@ -85,7 +90,7 @@
                     
                         if ($conexion->connect_error) die ("Fatal error");
 
-                        $query = "SELECT dni,rol, nombre, apellido,contrasena,telefono FROM rol_usuario";
+                        $query = "SELECT idPlan, costPan, minutDestPlan, BMPlan FROM plan";
                         $result = $conexion->query($query);
                         if (!$result) die ("Consulta falló");
 
@@ -100,11 +105,8 @@
                         <td><?php echo htmlspecialchars($fila[1]); ?></td> 
                         <td><?php echo htmlspecialchars($fila[2]); ?></td>
                         <td><?php echo htmlspecialchars($fila[3]); ?></td> 
-                        <td><?php echo htmlspecialchars($fila[4]); ?></td>
-                        <td><?php echo htmlspecialchars($fila[5]); ?></td>
                         <td>
-                            <a class="link_edit" href = "Actualizar_Cliente.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Editar</a>
-                            <a class="link_elimin" href = "Eliminar_Cliente.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Eliminar</a>
+                            <a class="link_edit" href = "Actualizar_InformePlan.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Editar</a>
                         </td>                        
                     </tr>
                     <?php

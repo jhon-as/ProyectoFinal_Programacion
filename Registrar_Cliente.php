@@ -4,9 +4,72 @@
             <title>Lista de Clientes </title>
             <link rel = "stylesheet" type="text/css" href="Menu.css">
             <link rel = "stylesheet" type="text/css" href="Cliente_Usuario.css">
+            <link rel = "stylesheet" type="text/css" href="Registrar_Cliente.css">
             <script src="menu.js"></script>
         </head>
         <body>
+            <?php
+                    require_once 'login.php';
+                    $conexion = new mysqli($hn, $un, $pw, $db);
+                                    
+                    if ($conexion->connect_error) die ("Fatal error");
+
+                    if(!empty($_POST['rol']) && !empty($_POST['dni']) && !empty($_POST['nombre']) && !empty($_POST['apellido'])
+                    && !empty($_POST['telefono']) && !empty($_POST['pass'])){ 
+
+                        if(isset($_POST['rol']) && isset($_POST['dni']) && isset($_POST['nombre']) && isset($_POST['apellido'])
+                        && isset($_POST['telefono']) && isset($_POST['pass']))
+                        {
+                            $rol = mysql_fix_string($conexion, $_POST['rol']);
+                            $dni = mysql_fix_string($conexion, $_POST['dni']);
+                            $nombre = mysql_fix_string($conexion, $_POST['nombre']);
+                            $apellido =mysql_fix_string($conexion, $_POST['apellido']);
+                            $telefono = mysql_fix_string($conexion, $_POST['telefono']);
+                            $pass=md5($_POST['pass']);
+                    
+                            if('administrador' ==  $rol){
+                                $query = "INSERT INTO rol_usuario VALUES( '$dni','$rol', '$nombre','$apellido','$pass','$telefono')";
+                                $result = $conexion->query($query);
+                            }else{
+                                $query = "INSERT INTO rol_usuario VALUES( '$dni','$rol', '$nombre','$apellido','$pass','$telefono')";
+                                $query2 = "INSERT INTO cliente VALUES('$dni','$nombre','$apellido','$telefono')";
+                                $result = $conexion->query($query);
+                                $result2 = $conexion->query($query2);
+                            }
+                            if (!$result || !$result2) die ("Falló registro");
+                            header('location: Cliente_Usuario.php');          
+                        }
+                    }else{
+                    echo <<<_END
+                    <div id="openModal" class="modalDialog">
+                        <div>
+                            <form id ="principal" method="post" action="Registrar_Cliente.php" >
+                            <h2>Registro De Usuarios</h2>
+                            <select name="rol" size="1">
+                                    <option value="cliente">CLIENTE</options>
+                                    <option value="administrador">ADMINISTRADOR</options>
+                                </select>
+                                <input type="text" name="dni" placeholder="DNI" >
+                                <input type="text" name="nombre" placeholder="NOMBRE">
+                                <input type="text" name="apellido" placeholder="APELLIDO">
+                                <input type="text" name="telefono" placeholder="TELEFONO">
+                                <input type="password" name="pass" placeholder="CONTRASEÑA">
+                                <input type="hidden" name="reg" value="yes">
+                                <input id ="registro" type="submit" value = "Registrar">
+                                <a id ="vuelve" href='Cliente_Usuario.php'>Volver Anterior</a>
+                            </form>
+                        </div>
+                    </div>
+                _END;
+                
+                } 
+                function mysql_fix_string($conexion, $string)
+                {
+                    if (get_magic_quotes_gpc())
+                        $string = stripcslashes($string);
+                    return $conexion->real_escape_string($string);
+                } 
+            ?>                 
             <nav>
                 <input type="checkbox" id = "check">
                 <label for ="check" class="checkbtn">
@@ -16,14 +79,14 @@
                 <ul>
                     <li><a class ="active" href="PaginaPrincipal.php">Inicio</a></li>
                     <li><a href="Cliente_Usuario.php">Cliente / Usuario</a></li>
-                    <li><a href="Servico_Cliente.php">Registro De Servicio</a></li>
-                    <li><a href="Cargar_Informe.php">Plan / Pago</a></li>
+                    <li><a href="#">Registro De Servicio</a></li>
+                    <li><a href="Cargar_Informe.php">PLan / Pago</a></li>
                 </ul>
             </nav>
             <section id="container">
                 <h1>Lista de Clientes</h1> 
 
-                <form action="#" method="get" class="form_seach" >
+                <form action="buscar.php" method="get" class="form_seach" >
                 <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda">
                 <input type="submit" value="Buscar" class="btn_search">
                 </form>
@@ -63,9 +126,9 @@
             </section>
             <section id="container1">
                 <h1>Lista de Usuarios</h1> 
-                <a href='Registrar_Cliente.php' class="nota">Registrar</a>
+                <a href='#' class="nota">Registrar</a>
 
-                <form action="Buscar_Cliente.php" method="get" class="form_seach" >
+                <form action="buscar.php" method="get" class="form_seach" >
                 <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda">
                 <input type="submit" value="Buscar" class="btn_search">
                 </form>
@@ -103,8 +166,8 @@
                         <td><?php echo htmlspecialchars($fila[4]); ?></td>
                         <td><?php echo htmlspecialchars($fila[5]); ?></td>
                         <td>
-                            <a class="link_edit" href = "Actualizar_Cliente.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Editar</a>
-                            <a class="link_elimin" href = "Eliminar_Cliente.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Eliminar</a>
+                            <a class="link_edit" href = "actualizar.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Editar</a>
+                            <a class="link_elimin" href = "eliminar.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Eliminar</a>
                         </td>                        
                     </tr>
                     <?php

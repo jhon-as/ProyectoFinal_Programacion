@@ -1,0 +1,81 @@
+h2{  
+    text-align: center;  
+    margin-top: 15px;
+    font-size: 30px;
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(0, 89, 255);
+    margin-bottom: 15px;
+ }
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 1;/*este es el que da el comportamiento del modal*/
+	opacity:1;
+	transition: opacity 400ms ease-in;
+	pointer-events: auto;
+}
+.modalDialog:target {
+	opacity:0;
+	pointer-events: auto;
+}
+#principal{
+    background-color:rgb(255, 255, 255);
+    height: 380px;
+    width: 500px;
+    float: left;  
+    margin-left: 420px; 
+    margin-right: 30px; 
+    margin-top: 50px;
+    border-radius: 10px;
+ }
+ 
+ input[type="text"], input[type="date"]{
+    margin-left: 50px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 17px;
+    padding: 19px 16px;
+    width: 400px;
+    border: 1px solid #99dce7;
+    height: 30px;
+    line-height: 16px;
+    color: #444;
+    font-family: 'Verdana', sans-serif;
+ }
+
+ input:visited { border: 1px solid #dddfe2;}
+ input:hover   { border: 1px solid rgb(132, 222, 245); }
+
+ #registro{
+    margin-top: 10px;
+   margin-left: 50px;
+   background-color: #1877f2;
+   border: none;
+   border-radius: 6px;
+   font-size: 20px;
+   padding: 0 16px;
+   width: 210px ;
+   height: 45px;
+   color: #fff; 
+   text-align: center;
+   margin-bottom: 20px;
+   cursor: pointer;
+}
+
+#vuelve{
+   background-color: rgb(42, 185, 42);
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   font-size: 20px;
+   margin-left: 40px;
+   text-decoration: none;
+   padding: 10px;
+   font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+}

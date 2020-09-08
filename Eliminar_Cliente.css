@@ -1,0 +1,64 @@
+h2{   
+    margin-top: 40px;
+    color: rgb(211, 43, 43);
+    text-align: center;
+    font-weight: 700;
+    font: italic bold 34px Verdana;
+    text-shadow: -4px 3px 0 #3b3b39;
+ }
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+    left: 0;
+    background: rgba(75, 73, 73, 0.8);
+	z-index: 1;/*este es el que da el comportamiento del modal*/
+	opacity:1;
+	transition: opacity 400ms ease-in;
+	pointer-events: auto;
+}
+.modalDialog:target {
+	opacity:0;
+	pointer-events: auto;
+}
+#principal{
+    background-color:rgb(246, 246, 250);
+    height: 210px;
+    width: 340px;
+    float: left;  
+    margin-left: 510px; 
+    margin-top: 110px;
+    border-radius: 5px;
+ }
+ 
+ #inicio{
+    margin-top: 30px;
+   margin-left: 40px;
+   background-color: #d44141;
+   border: none;
+   font-size: 15px;
+   padding: 10px;
+   border-radius: 3px;
+   width: 120px ;
+   height: 36px;
+   color: #fff; 
+   text-align: center;
+   margin-bottom: 10px;
+   cursor: pointer;
+   font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+}
+
+#cuenta{
+   background-color: rgb(36, 136, 36);
+   color: #fff;
+   border: none;
+   font-size: 15px;
+   margin-left: 30px;
+   text-decoration: none;
+   padding: 10px;
+   border-radius: 3px;
+   font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+}
+ 

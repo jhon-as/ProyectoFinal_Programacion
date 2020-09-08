@@ -1,0 +1,97 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+#container1{
+    height: 50px;
+    width: 1000px;
+    margin-left: 190px;
+    background: rgb(98, 97, 112);
+}
+#container2{
+    height: 300px;
+    width: 1000px;
+    margin-left: 190px;
+    background: rgb(255, 255, 255);
+}
+#container3{
+    height: 50px;
+    width: 1000px;
+    margin-left: 190px;
+    background: rgb(98, 97, 112);
+}
+nav{
+    margin-top: 20px;
+    height: 90px;
+    width: 1000px;
+    margin-left: 190px;
+    background: rgb(241, 241, 252);
+    border-radius: 15px 15px;
+}
+img{
+    float: left;
+}
+h4{
+    float: right;
+    margin-top: 10px; 
+    margin-right: 100px; 
+    text-shadow: 3px 3px 5px rgb(114, 161, 247),
+    6px 6px 5px rgb(15, 15, 15),
+    9px 9px 5px rgb(43, 43, 161);
+    font-size: 60px;
+    font-family: Helvetica, Arial, sans-serif;
+    color: rgb(0, 89, 255);
+}
+h5{
+    float: right;
+    margin-right: 400px;
+    font-size: 35px;
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+}
+#Informe{
+    padding: 20px;
+    height: 40px;
+}
+#paquetes{
+    height: 100px;
+    padding: 20px;
+    width: 440px;
+    float: left;
+}
+#raya{
+    background: black;
+    height: 200px;
+    width: 2px;
+    float: left;
+    margin-right: 28px;
+}
+#Informe_personal{
+    padding: 20px;
+    height: 100px;
+}
+#comentario{
+    font-size: 20px;
+    color: rgb(20, 20, 20);
+}
+
+/*---------------------------------------------------------------------------------*/
+
+.letra{
+    font-size: 18px;
+    color: rgb(21, 22, 22);
+}
+.nota{
+    margin-top: 10px;
+    margin-left: 20px;
+    display: inline-block;
+    background: rgb(35, 12, 146);
+    padding: 5px 25px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+#jhon{
+    text-align: center;
+    font-size: 10px;
+}

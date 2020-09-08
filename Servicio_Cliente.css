@@ -1,17 +1,4 @@
 
-#container{
-    border-radius: 5px;
-    float: left;
-    width: 520px;
-    margin-left: 10px; 
-    margin-top: 20px;
-    background-color:rgb(236, 237, 241);
-}
-#container h1{
-    margin-top: 10px;
-    font-size: 25px;
-    display: inline-block;
-}
 .form_seach{
     display: -webkit-flex;
     display: -moz-flex;
@@ -67,13 +54,12 @@ table td{
     text-decoration: none;
     margin-left:5px;
 }
-
 /*------------------------------------------------------------------------*/
 #container1{
     border-radius: 5px;
     float: left;
-    width: 800px;
-    margin-left: 10px; 
+    width: 1100px;
+    margin-left: 120px; 
     margin-top: 20px;
     background-color:rgb(236, 237, 241);
 }
