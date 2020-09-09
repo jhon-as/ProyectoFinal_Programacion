@@ -21,11 +21,19 @@
                 </ul>
             </nav>
             <section id="container">
+                <?php
+
+                        $buscar = strtolower($_REQUEST['busqueda']);
+
+                        if(empty($buscar)){
+                            header("location: Cliente_Usuario.php");
+                        }
+                ?>
                 <h1>Lista de Pagos</h1> 
                 <a href='Registrar_CargarInforme.php' class="nota">Registrar</a>
 
                 <form action="Buscar_CargarInforme.php" method="get" class="form_seach" >
-                <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda">
+                <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda" value="<?php echo $buscar ?> ">
                 <input type="submit" value="Buscar" class="btn_search">
                 </form>
                 <table>
@@ -43,7 +51,14 @@
                     
                         if ($conexion->connect_error) die ("Fatal error");
 
-                        $query = "SELECT id, FechaPago, pago, dniClie, idPlan, numeServ FROM informe";
+                        $query = "SELECT id, FechaPago, pago, dniClie, idPlan, numeServ FROM informe
+                                        where(
+                                            FechaPago like '%$buscar%' OR
+                                            pago LIKE '%$buscar%' OR 
+                                            dniClie LIKE '%$buscar%' OR 
+                                            idPlan LIKE '%$buscar%'OR 
+                                            numeServ LIKE '%$buscar%'
+                                        )";
                         $result = $conexion->query($query);
                         if (!$result) die ("Consulta falló");
 

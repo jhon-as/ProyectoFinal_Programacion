@@ -21,11 +21,19 @@
     </ul>
 </nav>
 <section id="container1">
+                <?php
+
+                $buscar = strtolower($_REQUEST['busqueda']);
+
+                if(empty($buscar)){
+                    header("location: Cliente_Usuario.php");
+                }
+                ?>
                 <h1>Informe General</h1> 
                 <a href='SesionServicio.php' class="nota">Salir</a>
 
                 <form action="Buscar_PaginaPrincipal.php" method="get" class="form_seach" >
-                <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda">
+                <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda" value="<?php echo $buscar ?> ">
                 <input type="submit" value="Buscar" class="btn_search">
                 </form>
                 <table>
@@ -50,7 +58,17 @@
                                     from cliente_servicio as cs 
                                     inner join cliente as c on cs.dniClie = c.dniClie
                                     inner join servicio as s on cs.numeServ = s.numeServ
-                                    inner join plan as p on s.idPlan = p.idPlan";
+                                    inner join plan as p on s.idPlan = p.idPlan
+                                    where(
+                                        c.dniClie like '%$buscar%' OR
+                                        c.nombClie LIKE '%$buscar%' OR 
+                                        c.apelClie LIKE '%$buscar%' OR 
+                                        s.numeServ LIKE '%$buscar%'OR 
+                                        p.idPlan LIKE '%$buscar%' OR
+                                        p.costPan LIKE '%$buscar%' OR
+                                        s.fechInicServ LIKE '%$buscar%' OR
+                                        s.fechPagoServ LIKE '%$buscar%' 
+                                        )";
 
                         $result = $conexion->query($query);
                         if (!$result) die ("Consulta falló");

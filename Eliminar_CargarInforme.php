@@ -4,9 +4,45 @@
             <title>Lista de Clientes </title>
             <link rel = "stylesheet" type="text/css" href="Menu.css">
             <link rel = "stylesheet" type="text/css" href="Cargar_Informe.css">
+            <link rel = "stylesheet" type="text/css" href="Eliminar_Cliente.css">
             <script src="menu.js"></script>
         </head>
         <body>
+        <?php 
+                require_once 'login.php';
+                $conexion = new mysqli($hn, $un, $pw, $db);
+
+                if ($conexion->connect_error) die ("Fatal error");
+
+                if (isset($_POST['id']))
+                {
+                    $id = $_POST['id'];
+
+                        $query = "DELETE FROM informe WHERE id = '$id'";
+                        $result = $conexion->query($query);
+                    if (!$result) echo " DELETE falló <br><br>";
+                    header('location: Cargar_Informe.php');
+                }
+
+                if(empty($_GET['id'])){
+                    header('location: Cargar_Informe.php');
+                }
+                $id = $_GET['id'];
+
+                echo <<<_END
+                    <div id="openModal" class="modalDialog">
+                        <div>
+                            <form id ="principal" method="post" action="Eliminar_CargarInforme.php" >
+                            <h2>¿Desea eliminar?</h2>
+                                <input type="hidden" name="id" value = "$id">
+                                <input id ="inicio" type="submit" value = "Eliminar">
+                                <a id ="cuenta" href='Cargar_Informe.php'>Volver Anterior</a>
+                            </form>
+                        </div>
+                    </div>
+                _END;
+                $conexion->close();
+            ?>   
             <nav>
                 <input type="checkbox" id = "check">
                 <label for ="check" class="checkbtn">
@@ -24,7 +60,7 @@
                 <h1>Lista de Pagos</h1> 
                 <a href='Registrar_CargarInforme.php' class="nota">Registrar</a>
 
-                <form action="Buscar_CargarInforme.php" method="get" class="form_seach" >
+                <form action="#" method="get" class="form_seach" >
                 <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda">
                 <input type="submit" value="Buscar" class="btn_search">
                 </form>
@@ -60,8 +96,8 @@
                         <td><?php echo htmlspecialchars($fila[1]); ?></td> 
                         <td><?php echo htmlspecialchars($fila[2]); ?></td>  
                         <td>
-                            <a class="link_edit" href = "Actualizar_CargarInforme.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Editar</a>
-                            <a class="link_elimin" href = "Eliminar_CargarInforme.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Eliminar</a>
+                            <a class="link_edit" href = "Actualizar_Cliente.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Editar</a>
+                            <a class="link_elimin" href = "Actualizar_Cliente.php?id=<?php echo htmlspecialchars($fila[0]); ?>">Eliminar</a>
                         </td>                      
                     </tr>
                     <?php

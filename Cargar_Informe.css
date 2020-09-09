@@ -62,6 +62,11 @@ table td{
     text-decoration: none;
     float: left;
 }
+.link_elimin{
+    color: #ce0c0c;
+    text-decoration: none;
+    margin-left:5px;
+}
 
 /*------------------------------------------------------------------------*/
 #container1{

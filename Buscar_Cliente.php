@@ -71,9 +71,9 @@
                 }
                 ?>
                 <h1>Lista de Usuarios</h1> 
-                <a href='Buscar_Cliente.php' class="nota">Registrar</a>
+                <a href='Registrar_Cliente.php' class="nota">Registrar</a>
 
-                <form action="buscar.php" method="get" class="form_seach" >
+                <form action="Buscar_Cliente.php" method="get" class="form_seach" >
                 <input type ="text" placeholder="Buscador... " name = "busqueda" id = "busqueda" value="<?php echo $buscar ?> ">
                 <input type="submit" value="Buscar" class="btn_search">
                 </form>

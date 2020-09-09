@@ -21,7 +21,7 @@
                 </ul>
             </nav>
             <section id="container1">
-                <h1>Lista de Usuarios</h1> 
+                <h1>Lista de Servicios</h1> 
                 <a href='Registrar_ServicioCliente.php' class="nota">Registrar</a>
 
                 <form action="Buscar_ClienteServicio.php" method="get" class="form_seach" >
